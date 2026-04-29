@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
-import 'floaty/styles.css';
+import 'react-floaty/styles.css';
 import './demo.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

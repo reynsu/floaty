@@ -3,7 +3,7 @@ import {
   FloaterActionsProvider,
   useFloaterActions,
   type FloaterAction,
-} from 'floaty';
+} from 'react-floaty';
 
 // ──────────────────────────────────────────────────────────────────
 //  Tiny toast — used by demos to give visible feedback on actions

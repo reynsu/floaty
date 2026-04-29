@@ -1,5 +1,5 @@
 {
-  "name": "floaty",
+  "name": "react-floaty",
   "version": "0.1.0",
   "description": "Mobile-first floating action toolbar for React. Animated, outside-click dismissable, themable via CSS vars. Zero runtime dependencies.",
   "type": "module",
