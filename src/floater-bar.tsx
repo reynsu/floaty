@@ -61,6 +61,7 @@ export function FloaterBar() {
   const visible = actions.slice(0, maxVisible);
   const overflow = actions.slice(maxVisible);
   const hasOverflow = overflow.length > 0;
+  const slotCount = visible.length + (hasOverflow ? 1 : 0);
 
   const className = ['fa-bar', ctx.config.className].filter(Boolean).join(' ');
   const container = ctx.config.portalContainer ?? document.body;
@@ -74,7 +75,7 @@ export function FloaterBar() {
       data-state={open ? 'open' : 'closed'}
       onTransitionEnd={onTransitionEnd}
     >
-      {visible.map((action) => {
+      {visible.map((action, i) => {
         const hasLabel = Boolean(action.label);
         const hasIcon = action.icon != null;
         const accessibleName = action.ariaLabel ?? action.label;
@@ -87,6 +88,7 @@ export function FloaterBar() {
             data-icon-only={hasIcon && !hasLabel ? 'true' : undefined}
             disabled={action.disabled}
             aria-label={!hasLabel ? accessibleName : action.ariaLabel}
+            style={{ ['--fa-i' as string]: i, ['--fa-n' as string]: slotCount }}
             onClick={() => handleSelect(action)}
           >
             {hasIcon && (
@@ -116,6 +118,7 @@ export function FloaterBar() {
               aria-label="More actions"
               aria-haspopup="menu"
               aria-expanded={isOpen}
+              style={{ ['--fa-i' as string]: visible.length, ['--fa-n' as string]: slotCount }}
               onClick={toggle}
             >
               <span aria-hidden="true">+</span>

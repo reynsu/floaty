@@ -136,6 +136,48 @@ Then pass it to the provider:
 <FloaterActionsProvider className="theme-dark">…</FloaterActionsProvider>
 ```
 
+### Beyond the row — radial, arc, grid, spiral
+
+The bar exposes three structural knobs and per-button index/count vars so you can
+build any layout in pure CSS:
+
+| Knob | Default | Purpose |
+|---|---|---|
+| `--fa-display` | `flex` | Set to `block` / `grid` to escape the default flex row |
+| `--fa-width` | `min(100% - 24px, 520px)` | Bar width |
+| `--fa-height` | `auto` | Bar height — set to a fixed value for square/round canvases |
+| `--fa-i` (per button) | `0..n-1` | The button's index — set as inline style on every `.fa-action` |
+| `--fa-n` (per button) | `slot count` | Total visible slots (visible actions + overflow trigger) |
+
+Example — radial donut with 6 actions orbiting a center point:
+
+```css
+.theme-radial.fa-bar {
+  --fa-display: block;
+  --fa-width:  220px;
+  --fa-height: 220px;
+  --fa-bg: transparent;
+  --fa-shadow: none;
+}
+.theme-radial .fa-action {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  transform:
+    translate(-50%, -50%)
+    rotate(calc(var(--fa-i) * 360deg / var(--fa-n)))
+    translateY(-90px)
+    rotate(calc(-1 * var(--fa-i) * 360deg / var(--fa-n)));
+  transition-delay: calc(var(--fa-i) * 35ms);
+}
+```
+
+The same primitives compose into arcs (`180deg` instead of `360deg`), spirals
+(animate `translateY` over `var(--fa-i)`), or grids (`display: grid` + `grid-area`).
+
 ## Accessibility
 
 - Bar uses `role="toolbar"` and `aria-label="Floating actions"`

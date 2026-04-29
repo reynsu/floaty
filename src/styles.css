@@ -31,7 +31,16 @@
   /* — Position — */
   --fa-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   --fa-width: min(calc(100% - 24px), 520px);
+  --fa-height: auto;
   --fa-z: 9999;
+
+  /* — Structural (advanced) —
+   * Override these to escape the default flex row.
+   * Each .fa-action also receives `--fa-i` (its index) and `--fa-n`
+   * (the slot count, including the overflow trigger) as inline
+   * style vars, so themes can build radial / arc / spiral / grid
+   * layouts purely in CSS with calc() + transform. */
+  --fa-display: flex;
 
   /* — Layout direction — */
   --fa-flex-direction: row;
@@ -56,7 +65,8 @@
   left: 50%;
   transform: translate(-50%, 100%);
   width: var(--fa-width);
-  display: flex;
+  height: var(--fa-height);
+  display: var(--fa-display);
   flex-direction: var(--fa-flex-direction);
   align-items: var(--fa-align);
   gap: var(--fa-gap);
