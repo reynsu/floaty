@@ -11,6 +11,6 @@ coverage
 .playwright-mcp
 **/.playwright-mcp
 
-# Local screenshots from manual demo runs
-demo-*.png
-demo2-*.png
+# Local screenshots from manual playwright/demo runs
+*.png
+!docs/**/*.png

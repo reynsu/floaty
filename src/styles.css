@@ -44,6 +44,7 @@
   --fa-action-fw: 500;
   --fa-action-fs: inherit;
   --fa-action-flex: 1 1 0;
+  --fa-action-gap: 6px; /* gap between icon and label inside an action */
 
   /* — Action color states — */
   --fa-action-bg: rgba(0, 0, 0, 0.04);
@@ -98,7 +99,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--fa-action-gap);
+}
+
+/* Icon-only actions square up automatically (square aspect) */
+.fa-action[data-icon-only='true'] {
+  flex: 0 0 var(--fa-action-h);
+  width: var(--fa-action-h);
+  padding: 0;
 }
 
 .fa-action {

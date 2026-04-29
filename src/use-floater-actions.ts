@@ -24,6 +24,19 @@ export function useFloaterActions(): FloaterApi {
         warnDev('show() called with empty actions array — ignoring');
         return;
       }
+      for (const a of actions) {
+        const hasLabel = Boolean(a.label);
+        const hasIcon = a.icon != null;
+        if (!hasLabel && !hasIcon) {
+          warnDev(
+            `action "${a.id}" has neither label nor icon — it will render empty`,
+          );
+        } else if (!hasLabel && !a.ariaLabel) {
+          warnDev(
+            `action "${a.id}" is icon-only — provide ariaLabel for accessibility`,
+          );
+        }
+      }
       store.setState({ open: true, actions, options: options ?? {} });
     },
     [store],

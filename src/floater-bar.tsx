@@ -74,19 +74,30 @@ export function FloaterBar() {
       data-state={open ? 'open' : 'closed'}
       onTransitionEnd={onTransitionEnd}
     >
-      {visible.map((action) => (
-        <button
-          key={action.id}
-          type="button"
-          className="fa-action"
-          data-variant={action.variant ?? 'default'}
-          disabled={action.disabled}
-          onClick={() => handleSelect(action)}
-        >
-          {action.icon && <span className="fa-icon" aria-hidden="true">{action.icon}</span>}
-          <span className="fa-label">{action.label}</span>
-        </button>
-      ))}
+      {visible.map((action) => {
+        const hasLabel = Boolean(action.label);
+        const hasIcon = action.icon != null;
+        const accessibleName = action.ariaLabel ?? action.label;
+        return (
+          <button
+            key={action.id}
+            type="button"
+            className="fa-action"
+            data-variant={action.variant ?? 'default'}
+            data-icon-only={hasIcon && !hasLabel ? 'true' : undefined}
+            disabled={action.disabled}
+            aria-label={!hasLabel ? accessibleName : action.ariaLabel}
+            onClick={() => handleSelect(action)}
+          >
+            {hasIcon && (
+              <span className="fa-icon" aria-hidden="true">
+                {action.icon}
+              </span>
+            )}
+            {hasLabel && <span className="fa-label">{action.label}</span>}
+          </button>
+        );
+      })}
       {hasOverflow && (
         <OverflowPopover
           actions={overflow}

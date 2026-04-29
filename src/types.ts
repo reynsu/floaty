@@ -2,10 +2,21 @@ import type { ReactNode } from 'react';
 
 export type ActionVariant = 'default' | 'danger';
 
+/**
+ * One row in the floating bar.
+ *
+ * - With `label` only      → text-only button
+ * - With `icon` only       → icon-only button (must supply `ariaLabel` for a11y)
+ * - With both              → icon + label, side by side
+ *
+ * `ariaLabel` overrides the accessible name of the button. Required when
+ * `label` is omitted; optional when `label` is present.
+ */
 export type FloaterAction = {
   id: string;
-  label: string;
+  label?: string;
   icon?: ReactNode;
+  ariaLabel?: string;
   onSelect: () => void;
   disabled?: boolean;
   variant?: ActionVariant;

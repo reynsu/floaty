@@ -83,12 +83,27 @@ Returns `{ open, actions, options, show, hide, toggle }`.
 ```ts
 type FloaterAction = {
   id: string;
-  label: string;
-  icon?: ReactNode;
+  label?: string;       // optional — omit for icon-only buttons
+  icon?: ReactNode;     // optional — supply alongside or instead of label
+  ariaLabel?: string;   // overrides accessible name; required when label is omitted
   onSelect: () => void;
   disabled?: boolean;
   variant?: 'default' | 'danger';
 };
+```
+
+The component picks the right rendering based on what you pass:
+
+```tsx
+// Text only
+{ id: 'copy', label: 'Copy', onSelect: copy }
+
+// Icon + text (icon renders left of label)
+{ id: 'copy', label: 'Copy', icon: <CopyIcon />, onSelect: copy }
+
+// Icon only — supply ariaLabel for screen readers.
+// The button auto-squares to --fa-action-h via [data-icon-only].
+{ id: 'pin', icon: <PinIcon />, ariaLabel: 'Pin item', onSelect: pin }
 ```
 
 ### `ShowOptions`

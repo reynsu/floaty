@@ -159,6 +159,86 @@ describe('FloaterBar', () => {
     expect(onSelect).not.toHaveBeenCalled();
   });
 
+  it('renders icon + label side by side when both are provided', async () => {
+    const user = userEvent.setup();
+    const actions: FloaterAction[] = [
+      { id: 'copy', label: 'Copy', icon: <span data-testid="icon-copy">★</span>, onSelect: vi.fn() },
+    ];
+    render(
+      <FloaterActionsProvider>
+        <Harness actions={actions} />
+      </FloaterActionsProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'open' }));
+    const button = screen.getByRole('button', { name: 'Copy' });
+    expect(button.querySelector('.fa-icon')).toBeTruthy();
+    expect(button.querySelector('.fa-label')?.textContent).toBe('Copy');
+    expect(screen.getByTestId('icon-copy')).toBeTruthy();
+    expect(button.getAttribute('data-icon-only')).toBeNull();
+  });
+
+  it('renders icon-only when label is omitted, uses ariaLabel for accessibility', async () => {
+    const user = userEvent.setup();
+    const actions: FloaterAction[] = [
+      {
+        id: 'pin',
+        icon: <span data-testid="icon-pin">📌</span>,
+        ariaLabel: 'Pin item',
+        onSelect: vi.fn(),
+      },
+    ];
+    render(
+      <FloaterActionsProvider>
+        <Harness actions={actions} />
+      </FloaterActionsProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'open' }));
+    const button = screen.getByRole('button', { name: 'Pin item' });
+    expect(button.querySelector('.fa-label')).toBeNull();
+    expect(button.querySelector('.fa-icon')).toBeTruthy();
+    expect(button.getAttribute('data-icon-only')).toBe('true');
+  });
+
+  it('warns in dev when icon-only action lacks ariaLabel', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const actions: FloaterAction[] = [
+      { id: 'mute', icon: <span>🔇</span>, onSelect: vi.fn() },
+    ];
+    function Trigger() {
+      const { show } = useFloaterActions();
+      return <button onClick={() => show(actions)}>go</button>;
+    }
+    render(
+      <FloaterActionsProvider>
+        <Trigger />
+      </FloaterActionsProvider>,
+    );
+    fireEvent.click(screen.getByText('go'));
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('icon-only — provide ariaLabel'),
+    );
+    warn.mockRestore();
+  });
+
+  it('warns in dev when action has neither label nor icon', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const actions: FloaterAction[] = [{ id: 'empty', onSelect: vi.fn() }];
+    function Trigger() {
+      const { show } = useFloaterActions();
+      return <button onClick={() => show(actions)}>go</button>;
+    }
+    render(
+      <FloaterActionsProvider>
+        <Trigger />
+      </FloaterActionsProvider>,
+    );
+    fireEvent.click(screen.getByText('go'));
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('neither label nor icon'),
+    );
+    warn.mockRestore();
+  });
+
   it('unmounts after close transition ends', async () => {
     const user = userEvent.setup();
     const actions = makeActions(2);
