@@ -1,31 +1,68 @@
-/* floaty — default styles. Override via CSS custom properties or className. */
+/* floaty — default styles. Override via CSS custom properties or className.
+ *
+ * All declared knobs (24 vars). Override any of them in a .theme-* class
+ * applied to the Provider's `className` prop:
+ *
+ *   .theme-mine.fa-bar {
+ *     --fa-radius: 999px;
+ *     --fa-padding: 4px;
+ *     --fa-action-flex: 0 0 auto;
+ *     ...
+ *   }
+ */
 
 .fa-bar {
+  /* — Color — */
   --fa-bg: rgb(255, 255, 255);
   --fa-fg: rgb(20, 22, 28);
   --fa-fg-muted: rgb(96, 102, 116);
   --fa-border: rgba(0, 0, 0, 0.08);
   --fa-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --fa-danger: rgb(220, 38, 38);
+
+  /* — Geometry — */
   --fa-radius: 16px;
   --fa-radius-inner: 12px;
+  --fa-border-w: 1px;
+  --fa-border-style: solid;
+  --fa-padding: 6px;
+  --fa-gap: 6px;
+
+  /* — Position — */
+  --fa-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  --fa-width: min(calc(100% - 24px), 520px);
+  --fa-z: 9999;
+
+  /* — Layout direction — */
+  --fa-flex-direction: row;
+  --fa-align: center;
+
+  /* — Action sizing — */
+  --fa-action-h: 44px;
+  --fa-action-px: 12px;
+  --fa-action-py: 10px;
+  --fa-action-fw: 500;
+  --fa-action-fs: inherit;
+  --fa-action-flex: 1 1 0;
+
+  /* — Action color states — */
   --fa-action-bg: rgba(0, 0, 0, 0.04);
   --fa-action-bg-hover: rgba(0, 0, 0, 0.08);
   --fa-action-bg-active: rgba(0, 0, 0, 0.12);
-  --fa-danger: rgb(220, 38, 38);
-  --fa-z: 9999;
 
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  bottom: var(--fa-bottom);
   left: 50%;
   transform: translate(-50%, 100%);
-  width: min(calc(100% - 24px), 520px);
+  width: var(--fa-width);
   display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px;
+  flex-direction: var(--fa-flex-direction);
+  align-items: var(--fa-align);
+  gap: var(--fa-gap);
+  padding: var(--fa-padding);
   background: var(--fa-bg);
   color: var(--fa-fg);
-  border: 1px solid var(--fa-border);
+  border: var(--fa-border-w) var(--fa-border-style) var(--fa-border);
   border-radius: var(--fa-radius);
   box-shadow: var(--fa-shadow);
   z-index: var(--fa-z);
@@ -53,7 +90,8 @@
   background: var(--fa-action-bg);
   color: inherit;
   font: inherit;
-  font-weight: 500;
+  font-weight: var(--fa-action-fw);
+  font-size: var(--fa-action-fs);
   border-radius: var(--fa-radius-inner);
   cursor: pointer;
   transition: background-color 120ms ease;
@@ -64,16 +102,16 @@
 }
 
 .fa-action {
-  flex: 1 1 0;
+  flex: var(--fa-action-flex);
   min-width: 0;
-  padding: 10px 12px;
-  height: 44px;
+  padding: var(--fa-action-py) var(--fa-action-px);
+  height: var(--fa-action-h);
 }
 
 .fa-more {
   flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
+  width: var(--fa-action-h);
+  height: var(--fa-action-h);
   padding: 0;
   font-size: 20px;
   line-height: 1;
