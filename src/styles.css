@@ -1,0 +1,179 @@
+/* floaty — default styles. Override via CSS custom properties or className. */
+
+.fa-bar {
+  --fa-bg: rgb(255, 255, 255);
+  --fa-fg: rgb(20, 22, 28);
+  --fa-fg-muted: rgb(96, 102, 116);
+  --fa-border: rgba(0, 0, 0, 0.08);
+  --fa-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --fa-radius: 16px;
+  --fa-radius-inner: 12px;
+  --fa-action-bg: rgba(0, 0, 0, 0.04);
+  --fa-action-bg-hover: rgba(0, 0, 0, 0.08);
+  --fa-action-bg-active: rgba(0, 0, 0, 0.12);
+  --fa-danger: rgb(220, 38, 38);
+  --fa-z: 9999;
+
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: min(calc(100% - 24px), 520px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: var(--fa-bg);
+  color: var(--fa-fg);
+  border: 1px solid var(--fa-border);
+  border-radius: var(--fa-radius);
+  box-shadow: var(--fa-shadow);
+  z-index: var(--fa-z);
+  opacity: 0;
+  pointer-events: auto;
+  transition: transform 180ms ease-out, opacity 180ms ease-out;
+  box-sizing: border-box;
+}
+
+.fa-bar[data-state='open'] {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.fa-bar[data-state='closed'] {
+  transform: translate(-50%, 100%);
+  opacity: 0;
+  transition: transform 140ms ease-in, opacity 140ms ease-in;
+}
+
+.fa-action,
+.fa-more {
+  appearance: none;
+  border: 0;
+  background: var(--fa-action-bg);
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  border-radius: var(--fa-radius-inner);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.fa-action {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 12px;
+  height: 44px;
+}
+
+.fa-more {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.fa-action:hover:not(:disabled),
+.fa-more:hover:not(:disabled) {
+  background: var(--fa-action-bg-hover);
+}
+
+.fa-action:active:not(:disabled),
+.fa-more:active:not(:disabled) {
+  background: var(--fa-action-bg-active);
+}
+
+.fa-action:disabled,
+.fa-more:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fa-action[data-variant='danger'] {
+  color: var(--fa-danger);
+}
+
+.fa-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fa-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-popover {
+  position: absolute;
+  right: 6px;
+  bottom: calc(100% + 8px);
+  min-width: 180px;
+  background: var(--fa-bg);
+  color: var(--fa-fg);
+  border: 1px solid var(--fa-border);
+  border-radius: var(--fa-radius-inner);
+  box-shadow: var(--fa-shadow);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: calc(var(--fa-z) + 1);
+  transform-origin: bottom right;
+  animation: fa-popover-in 140ms ease-out;
+}
+
+@keyframes fa-popover-in {
+  from { transform: translateY(8px) scale(0.96); opacity: 0; }
+  to   { transform: translateY(0)   scale(1);    opacity: 1; }
+}
+
+.fa-popover-item {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 120ms ease;
+}
+
+.fa-popover-item:hover:not(:disabled) {
+  background: var(--fa-action-bg-hover);
+}
+
+.fa-popover-item:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fa-popover-item[data-variant='danger'] {
+  color: var(--fa-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-bar,
+  .fa-bar[data-state='closed'] {
+    transition: opacity 0.01ms linear;
+    transform: translate(-50%, 0);
+  }
+  .fa-bar[data-state='closed'] {
+    opacity: 0;
+  }
+  .fa-popover {
+    animation: none;
+  }
+}

@@ -1,0 +1,149 @@
+# floaty
+
+[![npm](https://img.shields.io/npm/v/floaty.svg)](https://www.npmjs.com/package/floaty)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/floaty)](https://bundlephobia.com/package/floaty)
+[![types](https://img.shields.io/npm/types/floaty.svg)](https://www.npmjs.com/package/floaty)
+[![license](https://img.shields.io/npm/l/floaty.svg)](./LICENSE)
+
+Mobile-first floating action toolbar for React. **Zero runtime dependencies** (React/ReactDOM as peers).
+
+- ~8 KB ESM, tree-shakable
+- CSS-only animations — no `framer-motion`, no JS animation lib
+- External store via `useSyncExternalStore` — consumers re-render only when they read state
+- Headless-friendly: theme via CSS custom properties, override with `className`
+- Accessible: WAI-ARIA toolbar role, ESC + outside-click dismiss
+- SSR-safe
+
+## Install
+
+```bash
+npm i floaty
+```
+
+## Quick start
+
+```tsx
+import { FloaterActionsProvider, useFloaterActions } from 'floaty';
+import 'floaty/styles.css';
+
+function App() {
+  return (
+    <FloaterActionsProvider maxVisible={3}>
+      <Page />
+    </FloaterActionsProvider>
+  );
+}
+
+function Page() {
+  const { show } = useFloaterActions();
+  return (
+    <button
+      onClick={() =>
+        show([
+          { id: 'copy',   label: 'Copy',   onSelect: () => copy() },
+          { id: 'share',  label: 'Share',  onSelect: () => share() },
+          { id: 'delete', label: 'Delete', variant: 'danger', onSelect: () => del() },
+          { id: 'archive', label: 'Archive', onSelect: () => archive() },
+          { id: 'pin',    label: 'Pin',    onSelect: () => pin() },
+        ])
+      }
+    >
+      Open actions
+    </button>
+  );
+}
+```
+
+The first three actions render as visible buttons. Anything beyond `maxVisible` collapses into a `+` overflow popover.
+
+## API
+
+### `<FloaterActionsProvider />`
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `maxVisible` | `number` | `3` | Visible action buttons before overflow |
+| `portalContainer` | `HTMLElement` | `document.body` | Portal target |
+| `className` | `string` | — | Extra class applied to the bar |
+| `closeOnOutsideClick` | `boolean` | `true` | Pointerdown outside the bar dismisses it |
+| `closeOnEscape` | `boolean` | `true` | Escape key dismisses it |
+
+### `useFloaterActions()`
+
+Returns `{ open, actions, options, show, hide, toggle }`.
+
+| Method | Signature | Notes |
+|---|---|---|
+| `show` | `(actions: FloaterAction[], options?: ShowOptions) => void` | No-op + dev warning on empty array |
+| `hide` | `() => void` | |
+| `toggle` | `(actions?: FloaterAction[]) => void` | Reuses last actions if not provided |
+
+### `FloaterAction`
+
+```ts
+type FloaterAction = {
+  id: string;
+  label: string;
+  icon?: ReactNode;
+  onSelect: () => void;
+  disabled?: boolean;
+  variant?: 'default' | 'danger';
+};
+```
+
+### `ShowOptions`
+
+```ts
+type ShowOptions = {
+  maxVisible?: number;       // override Provider default for this show call
+  dismissOnSelect?: boolean; // default true
+};
+```
+
+## Theming
+
+All visual tokens are CSS custom properties on `.fa-bar`. Override globally or via `className`:
+
+```css
+.fa-bar.theme-dark {
+  --fa-bg: #1a1d24;
+  --fa-fg: #f5f6fa;
+  --fa-action-bg: rgba(255,255,255,0.06);
+  --fa-action-bg-hover: rgba(255,255,255,0.12);
+  --fa-radius: 16px;
+  --fa-z: 1000;
+}
+```
+
+Then pass it to the provider:
+
+```tsx
+<FloaterActionsProvider className="theme-dark">…</FloaterActionsProvider>
+```
+
+## Accessibility
+
+- Bar uses `role="toolbar"` and `aria-label="Floating actions"`
+- Overflow uses `role="menu"` + `role="menuitem"`, with `aria-haspopup` and `aria-expanded` on the trigger
+- `prefers-reduced-motion: reduce` disables transitions
+
+## Local development
+
+```bash
+npm install
+npm run typecheck
+npm test
+npm run build
+```
+
+To run the demo app:
+
+```bash
+cd examples/vite-demo
+npm install
+npm run dev
+```
+
+## License
+
+[MIT](./LICENSE) © reynsu

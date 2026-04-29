@@ -1,0 +1,16 @@
+node_modules
+dist
+coverage
+.DS_Store
+*.log
+.vitest-cache
+.tsbuildinfo
+
+# Local agent artifacts
+.claude
+.playwright-mcp
+**/.playwright-mcp
+
+# Local screenshots from manual demo runs
+demo-*.png
+demo2-*.png
