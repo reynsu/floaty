@@ -14,3 +14,7 @@ coverage
 # Local screenshots from manual playwright/demo runs
 *.png
 !docs/**/*.png
+# Allow committed README assets
+!media/*.png
+!media/*.jpg
+!media/*.gif

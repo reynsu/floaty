@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] — 2026-05-02
+
+### Added
+- README hero/inbox/palette/themes screenshots — npm package page now shows
+  the component in action (sourced from raw URLs in /media of the GitHub repo,
+  not bundled in the npm tarball).
+
 ## [0.1.0] — 2026-05-02
 
 Initial public release as `@reynsu/react-floaty`.
@@ -31,4 +38,5 @@ Initial public release as `@reynsu/react-floaty`.
 - Zero runtime dependencies. React 18+ and react-dom 18+ as peers.
 - Sideeffects limited to `*.css`.
 
+[0.1.1]: https://github.com/reynsu/floaty/releases/tag/v0.1.1
 [0.1.0]: https://github.com/reynsu/floaty/releases/tag/v0.1.0

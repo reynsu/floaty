@@ -6,7 +6,7 @@
 [![license](https://img.shields.io/npm/l/@reynsu/react-floaty.svg)](./LICENSE)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/hero.gif" alt="react-floaty in action — bar slides up with five actions" width="640" />
+  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/hero.png" alt="react-floaty in action — bar slides up with five actions" width="640" />
 </p>
 
 Mobile-first floating action toolbar for React. **Zero runtime dependencies** (React/ReactDOM as peers).
@@ -65,7 +65,7 @@ The first three actions render as visible buttons. Anything beyond `maxVisible` 
 Each callback owns the consumer's state. Floaty stays neutral.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/inbox-bulk.gif" alt="Selecting two inbox rows summons an Archive bar; clicking Archive removes the rows" width="640" />
+  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/inbox-bulk.png" alt="Selecting two inbox rows summons an Archive bar; clicking Archive removes the rows" width="640" />
 </p>
 
 ## Keyboard-driven palette
@@ -73,7 +73,7 @@ Each callback owns the consumer's state. Floaty stays neutral.
 `toggle()` opens the bar from any handler — bind it to `⌘K` and you have a command palette in three lines.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/palette.gif" alt="Pressing Cmd+K opens the bar with file commands" width="640" />
+  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/palette.png" alt="Pressing Cmd+K opens the bar with file commands" width="640" />
 </p>
 
 ## API
@@ -140,7 +140,7 @@ type ShowOptions = {
 All visual tokens are CSS custom properties on `.fa-bar`. Override them to get any look — the demo site ships nine ready-made variants.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/themes.gif" alt="Cycling through default, dark, and radial themes" width="640" />
+  <img src="https://raw.githubusercontent.com/reynsu/floaty/main/media/themes.png" alt="Cycling through default, dark, and radial themes" width="640" />
 </p>
 
 Override globally or via `className`:
