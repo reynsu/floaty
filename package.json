@@ -1,6 +1,6 @@
 {
   "name": "@reynsu/react-floaty",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publishConfig": {
     "access": "public"
   },
@@ -58,7 +58,7 @@
   "bugs": {
     "url": "https://github.com/reynsu/floaty/issues"
   },
-  "homepage": "https://github.com/reynsu/floaty#readme",
+  "homepage": "https://floaty-site-livid.vercel.app",
   "engines": {
     "node": ">=18"
   },

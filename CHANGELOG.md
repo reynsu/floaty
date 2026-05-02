@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] — 2026-05-02
+
+### Changed
+- `homepage` in `package.json` now points to the live demo site
+  (https://floaty-site-livid.vercel.app) instead of the GitHub README.
+  npm displays this as the "Homepage" link in the package page sidebar,
+  giving discoverers an interactive playground in one click. The
+  GitHub repo is still linked separately via the `repository` field.
+
 ## [0.1.1] — 2026-05-02
 
 ### Added
@@ -38,5 +47,6 @@ Initial public release as `@reynsu/react-floaty`.
 - Zero runtime dependencies. React 18+ and react-dom 18+ as peers.
 - Sideeffects limited to `*.css`.
 
+[0.1.2]: https://github.com/reynsu/floaty/releases/tag/v0.1.2
 [0.1.1]: https://github.com/reynsu/floaty/releases/tag/v0.1.1
 [0.1.0]: https://github.com/reynsu/floaty/releases/tag/v0.1.0
