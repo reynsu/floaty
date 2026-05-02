@@ -1,9 +1,9 @@
-# floaty
+# @reynsu/react-floaty
 
-[![npm](https://img.shields.io/npm/v/react-floaty.svg)](https://www.npmjs.com/package/react-floaty)
-[![bundle size](https://img.shields.io/bundlephobia/minzip/react-floaty)](https://bundlephobia.com/package/react-floaty)
-[![types](https://img.shields.io/npm/types/react-floaty.svg)](https://www.npmjs.com/package/react-floaty)
-[![license](https://img.shields.io/npm/l/react-floaty.svg)](./LICENSE)
+[![npm](https://img.shields.io/npm/v/@reynsu/react-floaty.svg)](https://www.npmjs.com/package/@reynsu/react-floaty)
+[![bundle size](https://img.shields.io/bundlephobia/minzip/@reynsu/react-floaty)](https://bundlephobia.com/package/@reynsu/react-floaty)
+[![types](https://img.shields.io/npm/types/@reynsu/react-floaty.svg)](https://www.npmjs.com/package/@reynsu/react-floaty)
+[![license](https://img.shields.io/npm/l/@reynsu/react-floaty.svg)](./LICENSE)
 
 Mobile-first floating action toolbar for React. **Zero runtime dependencies** (React/ReactDOM as peers).
 
@@ -17,14 +17,14 @@ Mobile-first floating action toolbar for React. **Zero runtime dependencies** (R
 ## Install
 
 ```bash
-npm i react-floaty
+npm i @reynsu/react-floaty
 ```
 
 ## Quick start
 
 ```tsx
-import { FloaterActionsProvider, useFloaterActions } from 'react-floaty';
-import 'react-floaty/styles.css';
+import { FloaterActionsProvider, useFloaterActions } from '@reynsu/react-floaty';
+import '@reynsu/react-floaty/styles.css';
 
 function App() {
   return (
